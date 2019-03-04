@@ -1,10 +1,14 @@
 package com.foodblog.sa.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.foodblog.sa.enumHelper.ArticleStatus;
 
 @Entity
 @Table(name = "article", schema = "stonehead")
@@ -19,8 +23,17 @@ public class ArticleModel {
 	private String articlemaintag;
 	private String articlefirst;
 	private String articlesecond;
+	@Enumerated(EnumType.STRING)
+	private ArticleStatus articlestatus;
 	private String articletimestamp;
 	
+	
+	public ArticleStatus getArticlestatus() {
+		return articlestatus;
+	}
+	public void setArticlestatus(ArticleStatus articlestatus) {
+		this.articlestatus = articlestatus;
+	}
 	public String getArticletimestamp() {
 		return articletimestamp;
 	}

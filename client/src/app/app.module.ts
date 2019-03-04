@@ -26,6 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { DraftarticlesComponent } from './draftarticles/draftarticles.component';
 import { DraftarticlepublishComponent } from './draftarticlepublish/draftarticlepublish.component';
 import { ClientService } from './Service/ClientServer';
+import { NgxEditorModule } from 'ngx-editor';
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -51,7 +54,10 @@ import { ClientService } from './Service/ClientServer';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxEditorModule,
+    NgMultiSelectDropDownModule.forRoot(),
+    NgxSpinnerModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy },

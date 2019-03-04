@@ -1,7 +1,121 @@
+<br>
+<br>
+
 <section class="blog-content-area">
     <div class="container">
         <div class="row">
-            fgdfg
+            <!-- Featured Post Area -->
+            <div class="col-md-4 col-sm-4 col-xs-12">
+
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+                <h2>
+                    Create new post
+                </h2>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
+
+            </div>
+
+        </div>
+
+        <div class="row justify-content-center">
+            <!-- Blog Posts Area -->
+            <div class="col-12 col-lg-12">
+                <div class="blog-posts-area">
+
+                    <!-- Single Blog Post -->
+                    <div class="single-blog-post d-flex flex-wrap mt-50">
+                        <form class="col-md-12">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel heading</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="heading" class="form-control" [(ngModel)]="articlename" [ngModelOptions]="{standalone: true}" placeholder="Enter article heading">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel by</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="articleby" class="form-control" [(ngModel)]="articleby" [ngModelOptions]="{standalone: true}" placeholder="Enter article by">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel first paragraph</label>
+                                <div class="col-sm-10">
+                                    <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="firstparagraph" [ngModelOptions]="{standalone: true}" [minHeight]="100"></app-ngx-editor>
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel second paragraph</label>
+                                <div class="col-sm-10">
+                                    <app-ngx-editor [placeholder]="'Enter text here...'" [spellcheck]="true" [(ngModel)]="secondparagraph" [ngModelOptions]="{standalone: true}" [minHeight]="100"></app-ngx-editor>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel quote</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="articleby" class="form-control" [(ngModel)]="articlequote" [ngModelOptions]="{standalone: true}" placeholder="Enter article by">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel quote by</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="articleby" class="form-control" [(ngModel)]="articlequoteby" [ngModelOptions]="{standalone: true}" placeholder="Enter article by">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel main-tag</label>
+                                <div class="col-sm-10">
+                                    <ng-multiselect-dropdown [placeholder]="'Select main tag'" [data]="dropdownSingleList" [(ngModel)]="articlMaintag" [ngModelOptions]="{standalone: true}" [settings]="dropdownSingleSettings" (onSelect)="onSingleItemSelect($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel sub-tags</label>
+                                <div class="col-sm-10">
+                                    <ng-multiselect-dropdown [placeholder]="'Select sub tag'" [data]="dropdownList" [(ngModel)]="articlesecondtsgs" [ngModelOptions]="{standalone: true}" [settings]="dropdownMultiSettings" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)"
+                                        (onDeSelect)="onItemDeselected($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Articel main image</label>
+                                <div class="col-sm-10">
+                                    <input type="file" #docfile name="fileupload" (change)="fileChanged($event)">
+                                </div>
+                            </div>
+
+                            <!-- <div class="form-group row">
+                                <div class="col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Draft</button>
+                                </div>
+                            </div> -->
+                            <ol class="foode-pager mt-50">
+                                <li>
+                                    <a (click)="saveTodrafts()"> Save to drafts</a>
+                                </li>
+                                <li><a (click)="publishPost()"> Publish <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
+                            </ol>
+                        </form>
+                    </div>
+
+                </div>
+
+                <!-- Pager -->
+
+            </div>
         </div>
     </div>
 </section>
+
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#fff" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

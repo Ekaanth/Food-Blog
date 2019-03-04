@@ -1,6 +1,8 @@
 package com.foodblog.sa.serviceImp;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,12 +26,15 @@ public class SiteVisitServiceImp implements SiteVisitService{
 
 	@Override
 	public SiteVisitModel addToSiteLog(SiteVisitModel visitDetails) {
-		if(uniqueIpAddress(visitDetails)) {
-			return	siteVisitRepo.save(visitDetails);
-		}
-		else {
-			return visitDetails;
-		}
+//		if(uniqueIpAddress(visitDetails)) {
+//			return	siteVisitRepo.save(visitDetails);
+//		}
+//		else {
+//			return visitDetails;
+//		}
+		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		visitDetails.setTimestamp(timeStamp);
+		return siteVisitRepo.save(visitDetails);
 	}
 	
 	public Boolean uniqueIpAddress(SiteVisitModel visitDetails) {
