@@ -1,0 +1,10 @@
+<div class="sidebar">
+    <a [routerLink]="['/adminpage']">Home</a>
+    <a [routerLink]="['/adminpage/newarticle']" routerLinkActive="active">New article</a>
+    <a [routerLink]="['/adminpage/draftarticles']" routerLinkActive="active">Draft article</a>
+    <a (click)="logoutClicked()">Logout</a>
+</div>
+
+<div class="content">
+    <router-outlet></router-outlet>
+</div>

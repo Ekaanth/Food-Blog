@@ -24,10 +24,16 @@ public class SiteVisitServiceImp implements SiteVisitService{
 
 	@Override
 	public SiteVisitModel addToSiteLog(SiteVisitModel visitDetails) {
-		return	siteVisitRepo.save(visitDetails);
+		if(uniqueIpAddress(visitDetails)) {
+			return	siteVisitRepo.save(visitDetails);
+		}
+		else {
+			return visitDetails;
+		}
 	}
 	
 	public Boolean uniqueIpAddress(SiteVisitModel visitDetails) {
+		System.out.println(siteVisitRepo.findByIpaddress(visitDetails.getIpaddress()));
 		if(siteVisitRepo.findByIpaddress(visitDetails.getIpaddress()) != null) {
 			return false;
 		}else {

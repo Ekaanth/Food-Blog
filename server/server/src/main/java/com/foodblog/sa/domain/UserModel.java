@@ -15,7 +15,14 @@ public class UserModel {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	private String name;
+	private String password;
 	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Long getId() {
 		return id;
 	}

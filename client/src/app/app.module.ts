@@ -16,6 +16,16 @@ import { ContactComponent } from './contact/contact.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { ArticleComponent } from './article/article.component';
 import { InstagramService } from './Service/instagramUserDetails';
+import { SigninComponent } from './signin/signin.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { AdminarticlecomponentComponent } from './adminarticlecomponent/adminarticlecomponent.component';
+import { AuthGuard } from './Service/AuthGuard';
+import { AuthenticationService } from './Service/AuthenticationService';
+import { HttpClientModule } from '@angular/common/http';
+import { DraftarticlesComponent } from './draftarticles/draftarticles.component';
+import { DraftarticlepublishComponent } from './draftarticlepublish/draftarticlepublish.component';
+import { ClientService } from './Service/ClientServer';
 
 @NgModule({
   declarations: [
@@ -26,7 +36,13 @@ import { InstagramService } from './Service/instagramUserDetails';
     AboutComponent,
     ContactComponent,
     ArchiveComponent,
-    ArticleComponent
+    ArticleComponent,
+    SigninComponent,
+    AdminComponent,
+    AdmindashboardComponent,
+    AdminarticlecomponentComponent,
+    DraftarticlesComponent,
+    DraftarticlepublishComponent
   ],
   imports: [
     BrowserModule,
@@ -35,10 +51,14 @@ import { InstagramService } from './Service/instagramUserDetails';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpModule,
+    HttpClientModule
   ],
   providers: [
     {provide: LocationStrategy, useClass: HashLocationStrategy },
-    InstagramService
+    InstagramService,
+    AuthGuard,
+    AuthenticationService,
+    ClientService
   ],
   bootstrap: [AppComponent]
 })

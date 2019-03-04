@@ -4,6 +4,11 @@ import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ArchiveComponent } from './archive/archive.component';
 import { ArticleComponent } from './article/article.component';
+import { SigninComponent } from './signin/signin.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
+import { AdminarticlecomponentComponent } from './adminarticlecomponent/adminarticlecomponent.component';
+import { AuthGuard } from './Service/AuthGuard';
 
 export const approutes: Routes = [
     {path: '', component: HomeComponent},
@@ -11,4 +16,19 @@ export const approutes: Routes = [
     {path: 'contact', component: ContactComponent},
     {path: 'archive', component: ArchiveComponent},
     {path: 'archive/{id}', component: ArticleComponent},
+
+    {path: 'admin', component: SigninComponent},
+    {path: 'adminpage',  component: AdminComponent,
+            children: [
+                {
+                    path: '',
+                    component: AdmindashboardComponent
+                },
+                {
+                    path: 'newarticle',
+                    component: AdminarticlecomponentComponent
+                }
+            ]
+        },
+        { path: '**', redirectTo: '' }
 ];

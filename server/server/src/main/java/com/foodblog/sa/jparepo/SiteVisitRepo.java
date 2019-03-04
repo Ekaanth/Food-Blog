@@ -8,6 +8,6 @@ import com.foodblog.sa.domain.SiteVisitModel;
 @Repository
 public interface SiteVisitRepo extends JpaRepository<SiteVisitModel, Long> {
 
-	public Boolean findByIpaddress(String ipaddress);
+	public SiteVisitModel findByIpaddress(String ipaddress);
 }
 
