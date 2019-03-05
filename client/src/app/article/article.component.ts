@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClientService } from '../Service/ClientServer';
+import { ArticleTagsService } from '../Service/ArticleTagsService';
 
 @Component({
   selector: 'app-article',
@@ -12,8 +13,9 @@ export class ArticleComponent implements OnInit {
 
   public articleId;
   public articleDetails: any;
-
-  constructor(  private spinner: NgxSpinnerService , private route: ActivatedRoute, private clientService: ClientService) { }
+  public articelSubtags = [];
+  constructor(  private spinner: NgxSpinnerService , private router: Router, private articleTagsService: ArticleTagsService,
+    private route: ActivatedRoute, private clientService: ClientService) { }
 
   ngOnInit() {
     this.spinner.show();
@@ -22,9 +24,15 @@ export class ArticleComponent implements OnInit {
   }
 
   getArticleById(data) {
-    this.articleDetails = JSON.parse(data._body);
-    console.log(this.articleDetails);
-    this.spinner.hide();
+    console.log(data);
+    if (data._body !== '') {
+      this.articleDetails = JSON.parse(data._body);
+      this.articelSubtags =  this.articleDetails.articleSubtags;
+      console.log(this.articleDetails);
+      this.spinner.hide();
+    } else {
+      this.router.navigateByUrl('/');
+    }
   }
 
 }

@@ -29,6 +29,9 @@ import { ClientService } from './Service/ClientServer';
 import { NgxEditorModule } from 'ngx-editor';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { ArticleTagsService } from './Service/ArticleTagsService';
+import { FiveArticlesComponent } from './GenericComponents/fivearticles/fivearticles.component';
+import { LatestPostComponent } from './GenericComponents/latestpost/latestpost.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AdmindashboardComponent,
     AdminarticlecomponentComponent,
     DraftarticlesComponent,
-    DraftarticlepublishComponent
+    DraftarticlepublishComponent,
+    FiveArticlesComponent,
+    LatestPostComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +69,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     InstagramService,
     AuthGuard,
     AuthenticationService,
-    ClientService
+    ClientService,
+    ArticleTagsService
   ],
   bootstrap: [AppComponent]
 })

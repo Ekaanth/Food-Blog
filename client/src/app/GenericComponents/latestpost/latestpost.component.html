@@ -1,0 +1,17 @@
+<!-- Title -->
+<div class="widget-title">
+    <h6>Latest Posts</h6>
+</div>
+
+<!-- Single Latest Posts -->
+<div class="single-latest-post d-flex" *ngFor="let post of latestPost">
+    <div class="post-thumb">
+        <img [src]="post.artcleimage" alt="">
+    </div>
+    <div class="post-content">
+        <a (click)="latestPostClicked(post)" class="post-title pointer">
+            <h6>{{post.articleheading}}</h6>
+        </a>
+        <a class="post-author"><span>by</span> {{post.articleby}}</a>
+    </div>
+</div>

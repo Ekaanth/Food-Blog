@@ -1,14 +1,21 @@
 package com.foodblog.sa.serviceImp;
 
+import java.io.Console;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 import javax.transaction.Transactional;
@@ -65,7 +72,7 @@ public class ArticleServiceImp implements ArticleService {
 		art.setArticlefirst(article.getArticleFirstParagraph());
 		art.setArticlesecond(article.getArticleSecondParagraph());
 		art.setArticlemaintag(article.getArticleMaintag().getTagName());
-		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String timeStamp = new SimpleDateFormat("dd MMMMM yyyy").format(new Date());
 		art.setArticletimestamp(timeStamp);
 		art.setArticlestatus(ArticleStatus.ACTIVE);
 		ArticleModel savedArticle = addArticle(art);
@@ -103,7 +110,7 @@ public class ArticleServiceImp implements ArticleService {
 		art.setArticlefirst(article.getArticleFirstParagraph());
 		art.setArticlesecond(article.getArticleSecondParagraph());
 		art.setArticlemaintag(article.getArticleMaintag().getTagName());
-		String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+		String timeStamp = new SimpleDateFormat("dd MMMMM yyyy").format(new Date());
 		art.setArticletimestamp(timeStamp);
 		art.setArticlestatus(ArticleStatus.PENDING);
 		ArticleModel savedArticle = addArticle(art);
@@ -176,16 +183,57 @@ public class ArticleServiceImp implements ArticleService {
 		 try {
 			 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 			 byte[] bytes = files.getBytes();
-//	            Path path = Paths.get(UPLOADED_FOLDER + "//" + id + "//"+ timeStamp+ ".jpeg");
-//	            Files.write(path, bytes);
-	            StringBuilder base64 = new StringBuilder("data:image/png;base64,");
-	            base64.append(Base64.getEncoder().encodeToString(bytes));
+	            Path path = Paths.get(UPLOADED_FOLDER + "//" + id + "//"+ timeStamp+ ".jpeg");
+	            Files.write(path, bytes);
+//	            StringBuilder base64 = new StringBuilder("data:image/png;base64,");
+//	            base64.append(Base64.getEncoder().encodeToString(bytes));
 	            ArticleModel artm = articleRepo.findById(id.intValue());
-	            artm.setArtcleimage(base64.toString());
+	            artm.setArtcleimage(path.toString());
 	            articleRepo.save(artm);
         } catch (IOException e) {
             e.printStackTrace();
         }
+	}
+
+	@Override
+	public TArticle getActiveArticleById(Long id) {
+		ArticleModel art = findArticleById(id);
+		if(art.getArticlestatus().equals(ArticleStatus.ACTIVE)) {
+			return getArticleById(id);
+		}else {
+			return null;
+		}
+	}
+	
+	@Override
+	public ArticleModel getActiveTArticleById(Long id) {
+		ArticleModel art = findArticleById(id);
+		if(art.getArticlestatus().equals(ArticleStatus.ACTIVE)) {
+			return findArticleById(id);
+		}else {
+			return null;
+		}
+	}
+
+	@Override
+	public ArrayList<ArticleModel> getLatestFiveArticles() {
+		ArrayList<ArticleModel> getAllActiveArticle = (ArrayList<ArticleModel>) articleRepo.findAll(); 
+		 Collections.sort(getAllActiveArticle, new Comparator<ArticleModel>() {
+			@Override
+			public int compare(ArticleModel o1, ArticleModel o2) {
+				 if (o1.getArticleby() == null || o2.getArticleby() == null)
+	                   return 0;     
+	                 return o1.getArticleby().compareTo(o2.getArticleby());
+			}
+           });
+		 ArrayList<ArticleModel> latestFive =  new ArrayList<>();
+		 for (ArticleModel articleModel : getAllActiveArticle) {
+			System.out.println(articleModel.getId());
+			if(latestFive.size() < 5) {
+				latestFive.add(getActiveTArticleById(articleModel.getId()));
+			}
+		}
+		return latestFive;
 	}
 
 }

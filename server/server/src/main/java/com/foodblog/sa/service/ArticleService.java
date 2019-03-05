@@ -1,5 +1,9 @@
 package com.foodblog.sa.service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 import com.foodblog.sa.domain.ArticleModel;
@@ -18,5 +22,11 @@ public interface ArticleService {
 	public TArticle getArticleById(Long id);
 
 	public void addArticleImage(MultipartFile files, Long id);
+
+	public TArticle getActiveArticleById(Long id);
+
+	public ArrayList<ArticleModel> getLatestFiveArticles();
+
+	public ArticleModel getActiveTArticleById(Long id);
 	
 }
