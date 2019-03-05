@@ -13,6 +13,7 @@ public class TArticle {
 	private String articleFirstParagraph;
 	private String articleSecondParagraph;
 	private TagsModel articleMaintag;
+	private String articleImage;
 	private ArrayList<TagsModel> articleSubtags;
 	private String articleQuote;
 	private String articelQuoteAuthor;
@@ -84,6 +85,12 @@ public class TArticle {
 	}
 	public void setArticleStatus(ArticleStatus articleStatus) {
 		this.articleStatus = articleStatus;
+	}
+	public String getArticleImage() {
+		return articleImage;
+	}
+	public void setArticleImage(String articleImage) {
+		this.articleImage = articleImage;
 	}
 
 	

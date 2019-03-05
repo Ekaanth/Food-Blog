@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -12,24 +11,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.foodblog.sa.domain.ArticleModel;
 import com.foodblog.sa.domain.SiteVisitModel;
 import com.foodblog.sa.domain.TagsModel;
 import com.foodblog.sa.service.ArticleService;
 import com.foodblog.sa.service.SiteVisitService;
 import com.foodblog.sa.service.TagsService;
-import com.foodblog.sa.service.UserService;
 import com.foodblog.sa.tmodel.TArticle;
 
 @RestController
 @RequestMapping(value = "/ClientController/api/")
 public class ClientController {
-
-	
-	@Autowired
-	private UserService userservice;
 	
 	@Autowired
 	private SiteVisitService siteVisitService;
@@ -39,6 +34,7 @@ public class ClientController {
 	
 	@Autowired
 	ArticleService articleService;
+	
 	
 	@RequestMapping(value = "/visitlog", method = RequestMethod.GET)
 	public ResponseEntity<Collection<SiteVisitModel>> visitlog() throws IOException {
@@ -82,5 +78,18 @@ public class ClientController {
 		return new ResponseEntity<TArticle>(article,
                 HttpStatus.OK);
 	}
+	
+	@RequestMapping(
+	        value = ("/uploadArticleImage"),
+	        method = RequestMethod.POST,
+	        headers = "content-type=multipart/form-data")
+	public ResponseEntity<String> uploadArticleImage(@RequestParam("file") MultipartFile files, @RequestParam("id") Long id)throws Exception
+	{
+		articleService.addArticleImage(files , id);
+		return new ResponseEntity<String>("OK",
+                HttpStatus.OK);
+	}
+	
+	
 
 }

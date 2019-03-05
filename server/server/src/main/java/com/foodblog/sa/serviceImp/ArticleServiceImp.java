@@ -1,7 +1,13 @@
 package com.foodblog.sa.serviceImp;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Optional;
 
@@ -9,6 +15,7 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.foodblog.sa.domain.ArticleModel;
 import com.foodblog.sa.domain.ArticleQuoteModel;
@@ -25,6 +32,8 @@ import com.foodblog.sa.tmodel.TArticle;
 @Transactional
 public class ArticleServiceImp implements ArticleService {
 
+	private static String UPLOADED_FOLDER ="C://Apache24//htdocs//downloadUpload//";
+	
 	@Autowired
 	ArticleRepo articleRepo;
 
@@ -148,17 +157,35 @@ public class ArticleServiceImp implements ArticleService {
 		article.setArticleSubtags(tagslist);
 		
 		ArticleModel art = findArticleById(id);
-		System.out.println(art.getArticlemaintag());
 		article.setArticleBy(art.getArticleby());
 		article.setArticleHeading(art.getArticleheading());
 		article.setArticleFirstParagraph(art.getArticlefirst());
 		article.setArticleSecondParagraph(art.getArticlesecond());
+		article.setArticleImage(art.getArtcleimage());
 		article.setTimestamp(art.getArticletimestamp());
 		article.setArticleStatus(art.getArticlestatus());
 		TagsModel maintag = tagsRepo.findByTagname(art.getArticlemaintag());
 		article.setArticleMaintag(maintag);
 		
 		return article;
+	}
+
+	@Override
+	public void addArticleImage(MultipartFile files, Long id) {
+		new File(UPLOADED_FOLDER + "//" + id).mkdirs();
+		 try {
+			 String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+			 byte[] bytes = files.getBytes();
+//	            Path path = Paths.get(UPLOADED_FOLDER + "//" + id + "//"+ timeStamp+ ".jpeg");
+//	            Files.write(path, bytes);
+	            StringBuilder base64 = new StringBuilder("data:image/png;base64,");
+	            base64.append(Base64.getEncoder().encodeToString(bytes));
+	            ArticleModel artm = articleRepo.findById(id.intValue());
+	            artm.setArtcleimage(base64.toString());
+	            articleRepo.save(artm);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 	}
 
 }

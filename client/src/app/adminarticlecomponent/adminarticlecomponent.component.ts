@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClientService } from '../Service/ClientServer';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adminarticlecomponent',
@@ -23,8 +24,10 @@ export class AdminarticlecomponentComponent implements OnInit {
   public articlesecondtsgs;
   public articlequote;
   public articlequoteby;
+  public imgeAttached;
 
-  constructor(private clientService: ClientService, private spinner: NgxSpinnerService) { }
+  constructor(private clientService: ClientService, private router: Router,
+    private spinner: NgxSpinnerService) { }
 
   ngOnInit() {
     this.spinner.show();
@@ -65,8 +68,9 @@ export class AdminarticlecomponentComponent implements OnInit {
     }
   }
 
-  fileChanged($event) {
-
+  fileChanged(event) {
+    this.imgeAttached = null;
+    this.imgeAttached = event.target.files[0];
   }
 
   onSingleItemSelect(event) {
@@ -78,6 +82,7 @@ export class AdminarticlecomponentComponent implements OnInit {
   }
 
   publishPost() {
+    this.spinner.show();
     const articleDetails = {
       articleHeading : this.articlename,
       articleBy: this.articleby,
@@ -89,7 +94,18 @@ export class AdminarticlecomponentComponent implements OnInit {
       articelQuoteAuthor: this.articlequoteby
     };
     console.log(articleDetails);
-    this.clientService.draftArticle(articleDetails).subscribe();
+    this.clientService.draftArticle(articleDetails).subscribe(data => this.draftedArtticle(data));
+  }
+
+  draftedArtticle(data) {
+    let formData = new FormData();
+    formData.append('id', data._body);
+    formData.append('file', this.imgeAttached);
+    this.clientService.uploadArticleImage(formData).subscribe(datares => this.uploadArticleImage(datares), error => this.spinner.hide());
+  }
+  uploadArticleImage(datares) {
+    this.router.navigateByUrl('/adminpage');
+    this.spinner.hide();
   }
 
   onItemDeselected(event) {

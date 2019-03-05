@@ -43,4 +43,18 @@ export class ClientService {
     const url = `${environment.appURL}ClientController/api/draftArticle?sysdatetime=${fulldatetime}`;
     return this.http.post(url, details);
   }
+
+  uploadArticleImage(details) {
+    const sysDateTime = new Date();
+    const fulldatetime = sysDateTime.getTime();
+    const url = `${environment.appURL}ClientController/api/uploadArticleImage?sysdatetime=${fulldatetime}`;
+    return this.http.post(url, details);
+  }
+
+  getArticleById(id) {
+    const sysDateTime = new Date();
+    const fulldatetime = sysDateTime.getTime();
+    const url = `${environment.appURL}ClientController/api/getArticleById/${id}?sysdatetime=${fulldatetime}`;
+    return this.http.get(url);
+  }
 }

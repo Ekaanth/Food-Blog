@@ -14,8 +14,8 @@ export const approutes: Routes = [
     {path: '', component: HomeComponent},
     {path: 'about', component: AboutComponent},
     {path: 'contact', component: ContactComponent},
-    {path: 'archive', component: ArchiveComponent},
-    {path: 'archive/{id}', component: ArticleComponent},
+    {path: 'allposts', component: ArchiveComponent},
+    {path: 'article/:id', component: ArticleComponent},
 
     {path: 'admin', component: SigninComponent},
     {path: 'adminpage',  component: AdminComponent,
