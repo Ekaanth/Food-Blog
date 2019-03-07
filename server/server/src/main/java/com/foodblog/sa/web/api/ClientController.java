@@ -74,7 +74,7 @@ public class ClientController {
 	
 	@RequestMapping(value = "/getArticleById/{id}", method = RequestMethod.GET)
 	public ResponseEntity<TArticle> getArticleById(@PathVariable("id") Long id) throws IOException {
-		TArticle article  = articleService.getActiveArticleById(id);
+		TArticle article  = articleService.getActiveTArticleById(id);
 		return new ResponseEntity<TArticle>(article,
                 HttpStatus.OK);
 	}

@@ -16,6 +16,7 @@ import com.foodblog.sa.domain.ArticleModel;
 import com.foodblog.sa.domain.SiteVisitModel;
 import com.foodblog.sa.service.ArticleService;
 import com.foodblog.sa.tmodel.TArticle;
+import com.foodblog.sa.tmodel.TCategoryCount;
 
 @RestController
 @RequestMapping(value = "/ArticleTagsController/api/")
@@ -32,10 +33,45 @@ public class ArticleTagsController {
 //                HttpStatus.OK);
 //	}
 	
+//	SELECT a.articlemaintag, count(*) FROM stonehead.article a 
+//	GROUP BY a.articlemaintag;
+	
 	@RequestMapping(value = "/getLatestFiveArticles", method = RequestMethod.GET)
 	public ResponseEntity<List<ArticleModel>> getLatestFiveArticles() throws IOException {
 		List<ArticleModel> latestFiveList = articleService.getLatestFiveArticles();
 		return new ResponseEntity<List<ArticleModel>>(latestFiveList,
                 HttpStatus.OK);
 	}
+	
+	
+//	NOT WORKING 
+	
+	@RequestMapping(value = "/getAllActiveArticles", method = RequestMethod.GET)
+	public ResponseEntity<Collection<TArticle>> getAllActiveArticles() throws IOException {
+		try {
+			Collection<TArticle> latestFiveList = articleService.getAllActiveArticles();
+			return new ResponseEntity<Collection<TArticle>>(latestFiveList,
+	                HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<Collection<TArticle>>(
+	                HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = "/getRandomCategoryCount", method = RequestMethod.GET)
+	public ResponseEntity<Collection<TCategoryCount>> getRandomCategoryCount() throws IOException {
+		try {
+			Collection<TCategoryCount> tagsCount = articleService.getRandomCategoryCount();
+			return new ResponseEntity<Collection<TCategoryCount>>(tagsCount,
+	                HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<Collection<TCategoryCount>>(
+	                HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	
+	
 }

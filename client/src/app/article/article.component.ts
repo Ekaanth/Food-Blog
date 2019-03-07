@@ -12,7 +12,7 @@ import { ArticleTagsService } from '../Service/ArticleTagsService';
 export class ArticleComponent implements OnInit {
 
   public articleId;
-  public articleDetails: any;
+  public articleDetails = null;
   public articelSubtags = [];
   constructor(  private spinner: NgxSpinnerService , private router: Router, private articleTagsService: ArticleTagsService,
     private route: ActivatedRoute, private clientService: ClientService) { }

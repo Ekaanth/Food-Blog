@@ -10,7 +10,7 @@
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a [routerLink]="['/']"><i class="fa fa-home"></i> Home</a></li>
                         <li class="breadcrumb-item"><a [routerLink]="['/allposts']">Blog List</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{articleDetails.articleHeading}}</li>
+                        <li class="breadcrumb-item active" aria-current="page" *ngIf="articleDetails !== null">{{articleDetails.articleHeading}}</li>
                     </ol>
                 </nav>
             </div>
@@ -28,7 +28,7 @@
                 <div class="blog-posts-area">
 
                     <!-- Post Details Area -->
-                    <div class="single-post-details-area">
+                    <div class="single-post-details-area" *ngIf="articleDetails !== null">
                         <div class="post-thumbnail mb-30">
                             <img [src]="articleDetails.articleImage" alt="image">
                         </div>

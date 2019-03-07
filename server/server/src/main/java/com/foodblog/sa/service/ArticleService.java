@@ -6,8 +6,10 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.foodblog.sa.domain.ArticleModel;
 import com.foodblog.sa.tmodel.TArticle;
+import com.foodblog.sa.tmodel.TCategoryCount;
 
 public interface ArticleService {
 
@@ -23,10 +25,14 @@ public interface ArticleService {
 
 	public void addArticleImage(MultipartFile files, Long id);
 
-	public TArticle getActiveArticleById(Long id);
+	public TArticle getActiveTArticleById(Long id);
 
 	public ArrayList<ArticleModel> getLatestFiveArticles();
 
-	public ArticleModel getActiveTArticleById(Long id);
+	public ArticleModel getActiveArticleById(Long id);
+
+	public Collection<TArticle> getAllActiveArticles() throws JsonProcessingException;
+
+	public Collection<TCategoryCount> getRandomCategoryCount();
 	
 }
