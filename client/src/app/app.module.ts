@@ -32,6 +32,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { ArticleTagsService } from './Service/ArticleTagsService';
 import { FiveArticlesComponent } from './GenericComponents/fivearticles/fivearticles.component';
 import { LatestPostComponent } from './GenericComponents/latestpost/latestpost.component';
+import { SubscriptionService } from './Service/SubscriptionService';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { LatestPostComponent } from './GenericComponents/latestpost/latestpost.c
     AuthGuard,
     AuthenticationService,
     ClientService,
-    ArticleTagsService
+    ArticleTagsService,
+    SubscriptionService
   ],
   bootstrap: [AppComponent]
 })

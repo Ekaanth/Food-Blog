@@ -45,8 +45,8 @@ public class ClientController {
 	
 	@RequestMapping(value = "/addToSiteLog", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SiteVisitModel> addToSiteLog(@RequestBody SiteVisitModel visitDetails) throws IOException {
-		siteVisitService.addToSiteLog(visitDetails);
-		return new ResponseEntity<SiteVisitModel>(
+		SiteVisitModel model = siteVisitService.addToSiteLog(visitDetails);
+		return new ResponseEntity<SiteVisitModel>(model,
                 HttpStatus.CREATED);
 	}
 	

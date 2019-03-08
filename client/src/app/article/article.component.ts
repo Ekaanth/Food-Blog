@@ -14,13 +14,23 @@ export class ArticleComponent implements OnInit {
   public articleId;
   public articleDetails = null;
   public articelSubtags = [];
+  public categoryCount = [];
   constructor(  private spinner: NgxSpinnerService , private router: Router, private articleTagsService: ArticleTagsService,
     private route: ActivatedRoute, private clientService: ClientService) { }
 
   ngOnInit() {
     this.spinner.show();
-    this.articleId = this.route.snapshot.paramMap.get('id');
-    this.clientService.getArticleById(this.articleId).subscribe(data => this.getArticleById(data));
+    // this.articleId = this.route.snapshot.paramMap.get('id');
+    this.route.params.subscribe( params =>  this.paramsSub(params));
+  }
+
+  paramsSub(params) {
+    this.clientService.getArticleById(params.id).subscribe(data => this.getArticleById(data));
+    this.articleTagsService.getRandomCategoryCount().subscribe(data => this.getRandomCategoryCount(data));
+  }
+
+  getRandomCategoryCount(data) {
+    this.categoryCount = JSON.parse(data._body);
   }
 
   getArticleById(data) {

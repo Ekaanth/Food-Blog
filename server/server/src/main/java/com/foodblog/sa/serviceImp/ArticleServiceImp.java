@@ -180,7 +180,7 @@ public class ArticleServiceImp implements ArticleService {
 	public void addArticleImage(MultipartFile files, Long id) {
 		new File(UPLOADED_FOLDER + "//" + id).mkdirs();
 		try {
-			String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+			String timeStamp = new SimpleDateFormat("dd MMMMM yyyy").format(new Date());
 			byte[] bytes = files.getBytes();
 			Path path = Paths.get(UPLOADED_FOLDER + "//" + id + "//" + timeStamp + ".jpeg");
 			Files.write(path, bytes);

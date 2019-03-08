@@ -15,4 +15,11 @@ export class ArticleTagsService {
     const url = `${environment.appURL}ArticleTagsController/api/getLatestFiveArticles?sysdatetime=${fulldatetime}`;
     return this.http.get(url);
   }
+
+  getRandomCategoryCount() {
+    const sysDateTime = new Date();
+    const fulldatetime = sysDateTime.getTime();
+    const url = `${environment.appURL}ArticleTagsController/api/getRandomCategoryCount?sysdatetime=${fulldatetime}`;
+    return this.http.get(url);
+  }
 }

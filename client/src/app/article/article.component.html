@@ -60,78 +60,19 @@
                     <!-- Post Tags & Share -->
                     <div class="post-tags-share d-flex justify-content-between align-items-center">
                         <!-- Tags -->
-                        <ol class="popular-tags d-flex flex-wrap" *ngFor="let item of articelSubtags">
-                            <li><a (click)="tagClicked(item)">{{item.tagName}}</a></li>
+                        Additional tags:
+                        <ol class="popular-tags d-flex flex-wrap " *ngFor="let item of articelSubtags">
+                            <li><a style=" cursor: pointer; " (click)="tagClicked(item)">{{item.tagName}}</a></li>
                         </ol>
                         <!-- Share -->
                         <div class="post-share">
                             <span>Share:</span>
-                            <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                            <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                            <a (click)="shareOnFacebook()"><i class="fa fa-facebook " style=" cursor: pointer; " aria-hidden="true"></i></a>
+                            <a (click)="shareOnTwitter()"><i class="fa fa-twitter " style=" cursor: pointer; " aria-hidden="true"></i></a>
+                            <a (click)="shareOnGooglePlus()"><i class="fa fa-google-plus " style=" cursor: pointer; " aria-hidden="true"></i></a>
+                            <a (click)="shareOnWhatsapp()"><i class="fa fa-whatsapp " style=" cursor: pointer; " aria-hidden="true"></i></a>
+                            <!-- <a href="#"><i class="fa fa-envelope" aria-hidden="true"></i></a> -->
                         </div>
-                    </div>
-
-                    <!-- Related Post Area -->
-                    <div class="related-posts clearfix">
-                        <!-- Line -->
-                        <div class="curve-line bg-img mb-50" style="background-image: url(img/core-img/breadcrumb-line.png);"></div>
-
-                        <!-- Headline -->
-                        <h4 class="headline">Relatest News</h4>
-
-                        <div class="row">
-
-                            <!-- Single Blog Post -->
-                            <div class="col-12 col-md-6">
-                                <div class="single-blog-post related-post">
-                                    <!-- Thumbnail -->
-                                    <div class="post-thumbnail mb-50">
-                                        <a href="#"><img src="img/blog-img/13.jpg" alt=""></a>
-                                    </div>
-                                    <!-- Content -->
-                                    <div class="post-content mb-50">
-                                        <p class="post-date">MAY 12, 2018 / drinks</p>
-                                        <a href="#" class="post-title">
-                                            <h4>Grain-Free Sweet &amp; Savory Activate Walnut Granola</h4>
-                                        </a>
-                                        <div class="post-meta">
-                                            <a href="#"><span>by</span> Sarah Jenks</a>
-                                            <a href="#"><i class="fa fa-eye"></i> 192</a>
-                                            <a href="#"><i class="fa fa-comments"></i> 08</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Single Blog Post -->
-                            <div class="col-12 col-md-6">
-                                <div class="single-blog-post related-post">
-                                    <!-- Thumbnail -->
-                                    <div class="post-thumbnail mb-50">
-                                        <a href="#"><img src="img/blog-img/14.jpg" alt=""></a>
-                                    </div>
-                                    <!-- Content -->
-                                    <div class="post-content mb-50">
-                                        <p class="post-date">MAY 15, 2018 / Coffee</p>
-                                        <a href="#" class="post-title">
-                                            <h4>Self-Care Interview Series: Gabrielle Russomagno</h4>
-                                        </a>
-                                        <div class="post-meta">
-                                            <a href="#"><span>by</span> Sarah Jenks</a>
-                                            <a href="#"><i class="fa fa-eye"></i> 192</a>
-                                            <a href="#"><i class="fa fa-comments"></i> 08</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <!-- Line -->
-                        <div class="curve-line bg-img" style="background-image: url(img/core-img/breadcrumb-line.png);"></div>
                     </div>
 
                     <!-- Leave A Comment -->
@@ -178,11 +119,8 @@
                         <div class="widget-title">
                             <h6>Categories</h6>
                         </div>
-                        <ol class="foode-catagories">
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> Drink</span> <span>(18)</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> Foody</span> <span>(28)</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> Tea</span> <span>(15)</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> Coffee</span> <span>(27)</span></a></li>
+                        <ol class="foode-catagories" *ngFor="let catCount of categoryCount">
+                            <li><a style="cursor: pointer;" (click)="categoryTagClicked(catCount)"><span><i class="fa fa-stop" aria-hidden="true"></i> {{catCount.tagName}}</span> <span>({{catCount.count}})</span></a></li>
                         </ol>
                     </div>
 
@@ -204,11 +142,11 @@
                             <h6>Archives</h6>
                         </div>
                         <ol class="foode-archives">
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> January 2018</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> February 2018</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> March 2018</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> April 2018</span></a></li>
-                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> May 2018</span></a></li>
+                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> One month back</span></a></li>
+                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> Two months back</span></a></li>
+                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> Six months back</span></a></li>
+                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> One Year back</span></a></li>
+                            <li><a href="#"><span><i class="fa fa-stop" aria-hidden="true"></i> All</span></a></li>
                         </ol>
                     </div>
 

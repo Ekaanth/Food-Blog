@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { InstagramService } from '../Service/instagramUserDetails';
 import { ArticleTagsService } from '../Service/ArticleTagsService';
 import { Router } from '@angular/router';
+import { ClientService } from '../Service/ClientServer';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { SubscriptionService } from '../Service/SubscriptionService';
 
 @Component({
   selector: 'app-home',
@@ -11,18 +14,32 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   private instaImages = [];
+  public latestPost = [];
+  public newsletter: FormGroup;
 
-  constructor(private instagramService: InstagramService, private router: Router,
-     private articleTagsService: ArticleTagsService) { }
+  constructor(private instagramService: InstagramService, private router: Router, private clientService: ClientService,
+     private articleTagsService: ArticleTagsService, private fb: FormBuilder, private subscriptionService: SubscriptionService) {
+       this.newsletter = this.fb.group({
+         email: [ '',  [Validators.required , Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]]
+       });
+     }
 
   ngOnInit() {
    this.instagramService.getInstaUserDetails().subscribe(data => this.getInstaUserDetails(data));
+   this.articleTagsService.getLatestFiveArticles().subscribe(data => this.getLatestFiveArticles(data));
+  }
+
+  getLatestFiveArticles(data) {
+    this.latestPost = JSON.parse(data._body);
   }
 
   getInstaUserDetails(data) {
     console.log(data);
-    let instaData = JSON.parse(data._body);
+    const instaData = JSON.parse(data._body);
     this.instaImages = instaData.data;
+  }
+  newslettterSubmit() {
+    this.subscriptionService.subscribe(this.newsletter.controls.email.value).subscribe(data => this.newsletter.reset());
   }
 
 
