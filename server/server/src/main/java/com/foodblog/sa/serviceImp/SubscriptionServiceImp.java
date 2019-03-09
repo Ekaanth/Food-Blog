@@ -14,7 +14,13 @@ import com.foodblog.sa.service.SubscriptionService;
 @Service
 public class SubscriptionServiceImp implements SubscriptionService {
 
-	@Autowired
+//	@Autowired
+//	private JavaMailSender javaMailSender;
+//
+//	@Autowired
+//	private VelocityEngine velocityEngine;
+	
+	@Autowired 
 	SubscriptionRepo subscriptionRepo;
 	
 	@Override
