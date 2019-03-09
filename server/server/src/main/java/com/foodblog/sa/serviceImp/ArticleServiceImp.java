@@ -17,6 +17,9 @@ import java.util.Random;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -238,13 +241,11 @@ public class ArticleServiceImp implements ArticleService {
 	@Override
 	public Collection<TArticle> getAllActiveArticles() throws JsonProcessingException {
 		Collection<ArticleModel> allActiceArticle = articleRepo.findAll();
-		Collection<TArticle> allActiceTArticle = null;
+		ArrayList<TArticle> allActiceTArticle = new ArrayList<>();
 		for (ArticleModel articleModel : allActiceArticle) {
 			if (articleModel.getArticlestatus().equals(ArticleStatus.ACTIVE)) {
-				// allActiceTArticle.add(getActiveArticleById(articleModel.getId()));
-				// System.out.println(getActiveArticleById(articleModel.getId());
-				ObjectMapper mapper = new ObjectMapper();
-				System.out.println(mapper.writeValueAsString(getActiveTArticleById(articleModel.getId())));
+				System.out.println(getActiveArticleById(articleModel.getId()).toString());
+				 allActiceTArticle.add(getActiveTArticleById(articleModel.getId()));
 			}
 		}
 		return allActiceTArticle;
@@ -274,6 +275,13 @@ public class ArticleServiceImp implements ArticleService {
 			tagCount.add(t);
 		}
 		return tagCount;
+	}
+
+	@Override
+	public Page<ArticleModel> findAllActiveArticlesPageination() {
+		Pageable firstPageWithTwoElements = PageRequest.of(0, 2);
+		Page<ArticleModel> articel =  articleRepo.findAll(firstPageWithTwoElements);
+		return articel;
 	}
 
 }

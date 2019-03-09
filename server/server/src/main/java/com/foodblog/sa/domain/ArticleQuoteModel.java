@@ -48,6 +48,11 @@ public class ArticleQuoteModel {
 	public void setTimestamp(String timestamp) {
 		this.timestamp = timestamp;
 	}
+	@Override
+	public String toString() {
+		return "ArticleQuoteModel [id=" + id + ", articleid=" + articleid + ", quotetext=" + quotetext
+				+ ", quoteauthor=" + quoteauthor + ", timestamp=" + timestamp + "]";
+	}
 	
 	
 	

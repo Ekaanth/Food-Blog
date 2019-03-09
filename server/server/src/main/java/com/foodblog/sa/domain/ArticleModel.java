@@ -87,5 +87,13 @@ public class ArticleModel {
 	public void setArticlesecond(String articlesecond) {
 		this.articlesecond = articlesecond;
 	}
+	@Override
+	public String toString() {
+		return "ArticleModel [id=" + id + ", articleheading=" + articleheading + ", articleby=" + articleby
+				+ ", artcleimage=" + artcleimage + ", articlemaintag=" + articlemaintag + ", articlefirst="
+				+ articlefirst + ", articlesecond=" + articlesecond + ", articlestatus=" + articlestatus
+				+ ", articletimestamp=" + articletimestamp + "]";
+	}
+	
 	
 }

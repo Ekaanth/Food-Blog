@@ -13,10 +13,11 @@ import { SubscriptionService } from '../Service/SubscriptionService';
 })
 export class HomeComponent implements OnInit {
 
-  private instaImages = [];
+  public instaImages = [];
   public latestPost = [];
   public newsletter: FormGroup;
-
+  public paginationArticles: any;
+  public listOfArticles = [];
   constructor(private instagramService: InstagramService, private router: Router, private clientService: ClientService,
      private articleTagsService: ArticleTagsService, private fb: FormBuilder, private subscriptionService: SubscriptionService) {
        this.newsletter = this.fb.group({
@@ -27,8 +28,14 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
    this.instagramService.getInstaUserDetails().subscribe(data => this.getInstaUserDetails(data));
    this.articleTagsService.getLatestFiveArticles().subscribe(data => this.getLatestFiveArticles(data));
+   this.articleTagsService.findAllActiveArticlesPageination().subscribe(data => this.getAllPaginationArticle(data));
   }
 
+  getAllPaginationArticle(data) {
+    this.paginationArticles = JSON.parse(data._body);
+    this.listOfArticles = this.paginationArticles.content;
+  }
+ 
   getLatestFiveArticles(data) {
     this.latestPost = JSON.parse(data._body);
   }

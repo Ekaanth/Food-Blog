@@ -22,4 +22,11 @@ export class ArticleTagsService {
     const url = `${environment.appURL}ArticleTagsController/api/getRandomCategoryCount?sysdatetime=${fulldatetime}`;
     return this.http.get(url);
   }
+
+  findAllActiveArticlesPageination() {
+    const sysDateTime = new Date();
+    const fulldatetime = sysDateTime.getTime();
+    const url = `${environment.appURL}ArticleTagsController/api/findAllActiveArticlesPageination?sysdatetime=${fulldatetime}`;
+    return this.http.get(url);
+  }
 }

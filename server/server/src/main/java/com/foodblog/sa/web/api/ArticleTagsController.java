@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,6 +73,32 @@ public class ArticleTagsController {
 		}
 	}
 	
+	
+	@RequestMapping(value = "/findAllActiveArticles", method = RequestMethod.GET)
+	public ResponseEntity<Collection<TArticle>> findAllActiveArticles() throws IOException {
+		try {
+			Collection<TArticle> allActiveArticle = articleService.getAllActiveArticles();
+			return new ResponseEntity<Collection<TArticle>>(allActiveArticle,
+	                HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<Collection<TArticle>>(
+	                HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = "/findAllActiveArticlesPageination", method = RequestMethod.GET)
+	public ResponseEntity<Page<ArticleModel>> findAllActiveArticlesPageination() throws IOException {
+		try {
+			Page<ArticleModel> allActiveArticle = articleService.findAllActiveArticlesPageination();
+			return new ResponseEntity<Page<ArticleModel>>(allActiveArticle,
+	                HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<Page<ArticleModel>>(
+	                HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	
 }

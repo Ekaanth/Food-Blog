@@ -4,6 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.foodblog.sa.domain.SubscriptionModel;
@@ -14,25 +16,35 @@ import com.foodblog.sa.service.SubscriptionService;
 @Service
 public class SubscriptionServiceImp implements SubscriptionService {
 
-//	@Autowired
-//	private JavaMailSender javaMailSender;
-//
-//	@Autowired
-//	private VelocityEngine velocityEngine;
-	
+	@Autowired
+	private JavaMailSender javaMailSender;
+
+
 	@Autowired 
 	SubscriptionRepo subscriptionRepo;
 	
+	
 	@Override
-	public void subscribeNewUser(String model) {
-		SubscriptionModel subModel = new SubscriptionModel();
-		subModel.setUseremail(model);
-		subModel.setStatus(UserStatus.ACTIVE);
-		String timeStamp = new SimpleDateFormat("dd MMMMM yyyy").format(new Date());
-		subModel.setTimestamp(timeStamp);
-		subscriptionRepo.save(subModel);
-		
+	public void subscribeNewUser(String email) throws Exception{
+
 //		SEND EMAIL FOR JOINING THE GROUP USE VELECITY TEMPELATE
+		
+		try {
+			SubscriptionModel sub = new SubscriptionModel();
+			sub.setUseremail(email);
+			sub.setStatus(UserStatus.ACTIVE);
+			String timeStamp = new SimpleDateFormat("dd MMMMM yyyy").format(new Date());
+			sub.setTimestamp(timeStamp);
+			subscriptionRepo.save(sub);
+			SimpleMailMessage message = new SimpleMailMessage(); 
+	        message.setTo(email); 
+	        message.setSubject("Test"); 
+	        message.setText("Email sent");
+	        javaMailSender.send(message);
+		} catch (Exception e) {
+			System.out.println(e);
+			}
+		
 		
 	}
 
@@ -43,6 +55,12 @@ public class SubscriptionServiceImp implements SubscriptionService {
 		subscriptionRepo.save(sub);
 		
 //		send unsubscription email
+		
+		SimpleMailMessage message = new SimpleMailMessage(); 
+        message.setTo(email); 
+        message.setSubject("Test"); 
+        message.setText("Email sent");
+        javaMailSender.send(message);
 	}
 
 	@Override
@@ -52,6 +70,12 @@ public class SubscriptionServiceImp implements SubscriptionService {
 		subscriptionRepo.save(sub);
 		
 //		send welcome back email
+		
+		SimpleMailMessage message = new SimpleMailMessage(); 
+        message.setTo(email); 
+        message.setSubject("Test"); 
+        message.setText("Email sent");
+        javaMailSender.send(message);
 	}
 
 }
