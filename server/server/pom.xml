@@ -89,9 +89,6 @@
 		</dependency>
 
 	</dependencies>
-
-	<packaging>jar</packaging>
-
 	<build>
 		<plugins>
 			<plugin>
@@ -117,7 +114,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		
 	</build>
 	
 	
