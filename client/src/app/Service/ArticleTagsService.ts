@@ -29,4 +29,18 @@ export class ArticleTagsService {
     const url = `${environment.appURL}ArticleTagsController/api/findAllActiveArticlesPageination?sysdatetime=${fulldatetime}`;
     return this.http.get(url);
   }
+
+  populatTagsLog(id) {
+    const sysDateTime = new Date();
+    const fulldatetime = sysDateTime.getTime();
+    const url = `${environment.appURL}ArticleTagsController/api/populatTagsLog?id=${id}&sysdatetime=${fulldatetime}`;
+    return this.http.get(url);
+  }
+
+  findAllActiveArticlesByTag(id) {
+    const sysDateTime = new Date();
+    const fulldatetime = sysDateTime.getTime();
+    const url = `${environment.appURL}ArticleTagsController/api/findAllActiveArticlesByTag/${id}?sysdatetime=${fulldatetime}`;
+    return this.http.get(url);
+  }
 }

@@ -1,24 +1,24 @@
 <div class="blog-posts-area" *ngFor="let article of articleList">
 
     <!-- Single Blog Post -->
-    <div class="single-blog-post d-flex flex-wrap mt-50">
+    <div *ngIf="article?.articleheading !== undefined" class="single-blog-post d-flex flex-wrap mt-50 pointer" (click)="clickOnPost(article)">
         <!-- Thumbnail -->
         <div class="post-thumbnail mb-50">
-            <a><img [src]="article.artcleimage" alt=""></a>
+            <a><img [src]="article?.artcleimage" alt=""></a>
         </div>
         <!-- Content -->
         <div class="post-content mb-50">
-            <p class="post-date"> {{article.articletimestamp}} / {{article.articlemaintag}}</p>
+            <p class="post-date"> {{article?.articletimestamp}} / {{article?.articlemaintag}}</p>
             <a class="post-title">
-                <h4>{{article.articleheading}}</h4>
+                <h4>{{article?.articleheading}}</h4>
             </a>
             <div class="post-meta">
-                <a><span>by</span> {{article.articleby}}</a>
+                <a><span>by</span> {{article?.articleby}}</a>
                 <!-- <a href="#"><i class="fa fa-eye"></i> 192</a>
                 <a href="#"><i class="fa fa-comments"></i> 08</a> -->
             </div>
-            <p class="post-excerpt">{{article.articlefirst}}</p>
-            <a href="#" class="read-more-btn">Continue Reading <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+            <p class="post-excerpt">{{article?.articlefirst}}</p>
+            <a class="read-more-btn">Continue Reading <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
         </div>
         <!-- Post Curve Line -->
         <img class="post-curve-line" src="./../../assets/img/core-img/post-curve-line.png" alt="">
@@ -26,3 +26,8 @@
 </div>
 
 <!-- Pager -->
+
+<ol class="foode-pager mt-50">
+    <li class="pointer" *ngIf="newerOff"><a (click)="previousClicked()"><i class="fa fa-long-arrow-left" aria-hidden="true"></i> Previous</a></li>
+    <li class="pointer" *ngIf="olderOff"><a (click)="nextClicked()">Next <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a></li>
+</ol>

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { ArticleTagsService } from 'src/app/Service/ArticleTagsService';
+import { Router, ActivatedRoute } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ClientService } from '../Service/ClientServer';
-import { ArticleTagsService } from '../Service/ArticleTagsService';
+import { ClientService } from 'src/app/Service/ClientServer';
 
 @Component({
-  selector: 'app-article',
-  templateUrl: './article.component.html',
-  styleUrls: ['./article.component.css']
+  selector: 'app-genericarchive',
+  templateUrl: './genericarchive.component.html',
+  styleUrls: ['./genericarchive.component.css']
 })
-export class ArticleComponent implements OnInit {
+export class GenericArchiveComponent implements OnInit {
 
   public articleId;
   public articleDetails = null;
@@ -46,9 +46,6 @@ export class ArticleComponent implements OnInit {
     }
   }
 
-  
   tagClicked(item) {
-    
   }
-
 }

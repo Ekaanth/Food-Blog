@@ -8,13 +8,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodblog.sa.domain.ArticleModel;
 import com.foodblog.sa.domain.SiteVisitModel;
+import com.foodblog.sa.domain.UserModel;
 import com.foodblog.sa.service.ArticleService;
 import com.foodblog.sa.tmodel.TArticle;
 import com.foodblog.sa.tmodel.TCategoryCount;
@@ -43,22 +47,7 @@ public class ArticleTagsController {
 		return new ResponseEntity<List<ArticleModel>>(latestFiveList,
                 HttpStatus.OK);
 	}
-	
-	
-//	NOT WORKING 
-	
-	@RequestMapping(value = "/getAllActiveArticles", method = RequestMethod.GET)
-	public ResponseEntity<Collection<TArticle>> getAllActiveArticles() throws IOException {
-		try {
-			Collection<TArticle> latestFiveList = articleService.getAllActiveArticles();
-			return new ResponseEntity<Collection<TArticle>>(latestFiveList,
-	                HttpStatus.OK);
-		} catch (Exception e) {
-			System.out.println(e);
-			return new ResponseEntity<Collection<TArticle>>(
-	                HttpStatus.BAD_REQUEST);
-		}
-	}
+		
 	
 	@RequestMapping(value = "/getRandomCategoryCount", method = RequestMethod.GET)
 	public ResponseEntity<Collection<TCategoryCount>> getRandomCategoryCount() throws IOException {
@@ -73,16 +62,29 @@ public class ArticleTagsController {
 		}
 	}
 	
-	
-	@RequestMapping(value = "/findAllActiveArticles", method = RequestMethod.GET)
-	public ResponseEntity<Collection<TArticle>> findAllActiveArticles() throws IOException {
+	@RequestMapping(value = "/getPopularTags", method = RequestMethod.GET)
+	public ResponseEntity<Collection<TCategoryCount>> getPopularTags() throws IOException {
 		try {
-			Collection<TArticle> allActiveArticle = articleService.getAllActiveArticles();
-			return new ResponseEntity<Collection<TArticle>>(allActiveArticle,
+			Collection<TCategoryCount> tagsCount = articleService.getRandomCategoryCount();
+			return new ResponseEntity<Collection<TCategoryCount>>(tagsCount,
 	                HttpStatus.OK);
 		} catch (Exception e) {
 			System.out.println(e);
-			return new ResponseEntity<Collection<TArticle>>(
+			return new ResponseEntity<Collection<TCategoryCount>>(
+	                HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+
+	@RequestMapping(value = "/populateTagsLog", method = RequestMethod.POST , consumes = MediaType.APPLICATION_JSON_VALUE,  produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> populateTagsLog(@RequestBody UserModel userdetails) throws IOException {
+		try {
+//			articleService.populatTagsLog(id);
+			return new ResponseEntity<String>("OK",
+	                HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<String>(
 	                HttpStatus.BAD_REQUEST);
 		}
 	}
@@ -100,5 +102,30 @@ public class ArticleTagsController {
 		}
 	}
 	
+	@RequestMapping(value = "/findAllActiveArticlesByTag/{id}", method = RequestMethod.GET)
+	public ResponseEntity<List<ArticleModel>> findAllActiveArticlesByTag(@PathVariable("id") Long id) throws IOException {
+		try {
+			List<ArticleModel> allActiveArticle = articleService.findAllActiveArticlesByTag(id);
+			return new ResponseEntity<List<ArticleModel>>(allActiveArticle,
+	                HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<List<ArticleModel>>(
+	                HttpStatus.BAD_REQUEST);
+		}
+	}
+	
+	@RequestMapping(value = "/findAllActiveArticleByName/{name}", method = RequestMethod.GET)
+	public ResponseEntity<Page<TArticle>> findAllActiveArticleByName(@PathVariable("name") String name) throws IOException {
+		try {
+			Page<TArticle> allActiveArticle = articleService.findAllActiveArticleByName(name);
+			return new ResponseEntity<Page<TArticle>>(allActiveArticle,
+	                HttpStatus.OK);
+		} catch (Exception e) {
+			System.out.println(e);
+			return new ResponseEntity<Page<TArticle>>(
+	                HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 }

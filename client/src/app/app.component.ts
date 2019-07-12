@@ -27,7 +27,8 @@ export class AppComponent implements OnInit {
       countryname: details.country_name,
       timestamp: date.getTime
     };
-    this.clientService.addToSiteLog(logDetails).subscribe();
+    // localStorage.setItem('userDetails' , details);
+    // this.clientService.addToSiteLog(logDetails).subscribe();
   }
 
 }

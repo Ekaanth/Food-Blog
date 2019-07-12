@@ -254,10 +254,8 @@ public class ArticleServiceImp implements ArticleService {
 	@Override
 	public Collection<TCategoryCount> getRandomCategoryCount() {
 		List<ArticleTagsModel> tCount = (List<ArticleTagsModel>) articelTagsRepo.findAll();
-
 		// shuffle list
 		Collections.shuffle(tCount);
-
 		// adding defined amount of numbers to target list
 		List<ArticleTagsModel> targetList = new ArrayList<ArticleTagsModel>();
 
@@ -279,9 +277,33 @@ public class ArticleServiceImp implements ArticleService {
 
 	@Override
 	public Page<ArticleModel> findAllActiveArticlesPageination() {
-		Pageable firstPageWithTwoElements = PageRequest.of(0, 2);
+		Pageable firstPageWithTwoElements = PageRequest.of(0, 100);
 		Page<ArticleModel> articel =  articleRepo.findAll(firstPageWithTwoElements);
 		return articel;
+	}
+
+	@Override
+	public List<ArticleModel> findAllActiveArticlesByTag(Long id) {
+		ArrayList<Long> articel =  articelTagsRepo.findByArticleListBytagid(id);
+		List<ArticleModel> articleList = new ArrayList<>();
+		int index = 0;
+		for (Long long1 : articel) {
+			articleList.add(articleRepo.findById(long1.longValue()));
+			index++;
+		}
+		return articleList;
+	}
+
+	@Override
+	public Page<TArticle> findAllActiveArticleByName(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void populatTagsLog(Long id) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -33,6 +33,8 @@ import { ArticleTagsService } from './Service/ArticleTagsService';
 import { FiveArticlesComponent } from './GenericComponents/fivearticles/fivearticles.component';
 import { LatestPostComponent } from './GenericComponents/latestpost/latestpost.component';
 import { SubscriptionService } from './Service/SubscriptionService';
+import { CategoriesComponent } from './GenericComponents/categories/categories.component';
+import { GenericArchiveComponent } from './GenericComponents/genericarchive/genericarchive.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { SubscriptionService } from './Service/SubscriptionService';
     DraftarticlesComponent,
     DraftarticlepublishComponent,
     FiveArticlesComponent,
-    LatestPostComponent
+    LatestPostComponent,
+    CategoriesComponent,
+    GenericArchiveComponent
   ],
   imports: [
     BrowserModule,

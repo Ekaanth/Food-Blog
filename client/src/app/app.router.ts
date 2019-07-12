@@ -8,7 +8,8 @@ import { SigninComponent } from './signin/signin.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdmindashboardComponent } from './admindashboard/admindashboard.component';
 import { AdminarticlecomponentComponent } from './adminarticlecomponent/adminarticlecomponent.component';
-import { AuthGuard } from './Service/AuthGuard';
+import { GenericArchiveComponent } from './GenericComponents/genericarchive/genericarchive.component';
+import { DraftarticlepublishComponent } from './draftarticlepublish/draftarticlepublish.component';
 
 export const approutes: Routes = [
     {path: '', component: HomeComponent},
@@ -16,7 +17,7 @@ export const approutes: Routes = [
     {path: 'contact', component: ContactComponent},
     {path: 'allposts', component: ArchiveComponent},
     {path: 'article/:id', component: ArticleComponent},
-
+    {path: 'tagsarchive/:archivename/:string', component: GenericArchiveComponent},
     {path: 'admin', component: SigninComponent},
     {path: 'adminpage',  component: AdminComponent,
             children: [
@@ -27,6 +28,10 @@ export const approutes: Routes = [
                 {
                     path: 'newarticle',
                     component: AdminarticlecomponentComponent
+                },
+                {
+                    path: 'draftarticles',
+                    component: DraftarticlepublishComponent
                 }
             ]
         },

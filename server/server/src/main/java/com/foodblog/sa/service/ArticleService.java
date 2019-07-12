@@ -37,5 +37,11 @@ public interface ArticleService {
 	public Collection<TCategoryCount> getRandomCategoryCount();
 
 	public Page<ArticleModel> findAllActiveArticlesPageination();
+
+	public List<ArticleModel> findAllActiveArticlesByTag(Long id);
+
+	public Page<TArticle> findAllActiveArticleByName(String name);
+
+	public void populatTagsLog(Long id);
 	
 }
