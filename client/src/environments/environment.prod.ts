@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  appURL: window.location.origin + window.location.pathname 
 };

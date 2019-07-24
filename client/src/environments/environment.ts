@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  appURL: 'http://localhost:8080/'
+  appURL: 'http://ec2-13-233-162-86.ap-south-1.compute.amazonaws.com/' + window.location.pathname
 };
 
 /*

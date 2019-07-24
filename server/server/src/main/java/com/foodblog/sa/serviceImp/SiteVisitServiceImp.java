@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodblog.sa.domain.SiteVisitModel;
-import com.foodblog.sa.domain.UserModel;
 import com.foodblog.sa.jparepo.SiteVisitRepo;
 import com.foodblog.sa.service.SiteVisitService;
 

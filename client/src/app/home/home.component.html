@@ -14,7 +14,7 @@
                                 <!-- Featured Post Content -->
                                 <div class="featured-post-content">
                                     <p>{{latestPost[0].articletimestamp}}/ {{latestPost[0].articlemaintag}}</p>
-                                    <a href="#" class="post-title">
+                                    <a [attr.href]="'#/article/' + latestPost[0].id" class="post-title">
                                         <h2>{{latestPost[0].articleheading}}</h2>
                                     </a>
                                 </div>
@@ -24,7 +24,7 @@
                                 <!-- Featured Post Content -->
                                 <div class="featured-post-content">
                                     <p>{{latestPost[1].articletimestamp}}/ {{latestPost[1].articlemaintag}}</p>
-                                    <a href="#" class="post-title">
+                                    <a [attr.href]="'#/article/' + latestPost[1].id" class="post-title">
                                         <h2>{{latestPost[1].articleheading}}</h2>
                                     </a>
                                 </div>
@@ -34,7 +34,7 @@
                                 <!-- Featured Post Content -->
                                 <div class="featured-post-content">
                                     <p>{{latestPost[2].articletimestamp}}/ {{latestPost[2].articlemaintag}}</p>
-                                    <a href="#" class="post-title">
+                                    <a [attr.href]="'#/article/' + latestPost[2].id" class="post-title">
                                         <h2>{{latestPost[2].articleheading}}</h2>
                                     </a>
                                 </div>
@@ -44,7 +44,7 @@
                                 <!-- Featured Post Content -->
                                 <div class="featured-post-content">
                                     <p>{{latestPost[3].articletimestamp}}/ {{latestPost[3].articlemaintag}}</p>
-                                    <a href="#" class="post-title">
+                                    <a [attr.href]="'#/article/' + latestPost[3].id" class="post-title">
                                         <h2>{{latestPost[3].articleheading}}</h2>
                                     </a>
                                 </div>
@@ -54,7 +54,7 @@
                                 <!-- Featured Post Content -->
                                 <div class="featured-post-content">
                                     <p>{{latestPost[4].articletimestamp}}/ {{latestPost[4].articlemaintag}}</p>
-                                    <a href="#" class="post-title">
+                                    <a [attr.href]="'#/article/' + latestPost[4].id" class="post-title">
                                         <h2>{{latestPost[4].articleheading}}</h2>
                                     </a>
                                 </div>
@@ -64,31 +64,31 @@
                         <ol class="carousel-indicators">
                             <li data-target="#featured-post-slides" data-slide-to="0" class="active">
                                 <h2>01</h2>
-                                <a href="#" class="post-title">
+                                <a [attr.href]="'#/article/' + latestPost[0].id" class="post-title">
                                     <h5>{{latestPost[0].articleheading}}</h5>
                                 </a>
                             </li>
                             <li data-target="#featured-post-slides" data-slide-to="1">
                                 <h2>02</h2>
-                                <a href="#" class="post-title">
+                                <a [attr.href]="'#/article/' + latestPost[1].id" class="post-title">
                                     <h5>{{latestPost[1].articleheading}}</h5>
                                 </a>
                             </li>
                             <li data-target="#featured-post-slides" data-slide-to="2">
                                 <h2>03</h2>
-                                <a href="#" class="post-title">
+                                <a [attr.href]="'#/article/' + latestPost[2].id" class="post-title">
                                     <h5>{{latestPost[2].articleheading}}</h5>
                                 </a>
                             </li>
                             <li data-target="#featured-post-slides" data-slide-to="3">
                                 <h2>04</h2>
-                                <a href="#" class="post-title">
+                                <a [attr.href]="'#/article/' + latestPost[3].id" class="post-title">
                                     <h5>{{latestPost[3].articleheading}}</h5>
                                 </a>
                             </li>
                             <li data-target="#featured-post-slides" data-slide-to="4">
                                 <h2>05</h2>
-                                <a href="#" class="post-title">
+                                <a [attr.href]="'#/article/' + latestPost[4].id" class="post-title">
                                     <h5>{{latestPost[4].articleheading}}</h5>
                                 </a>
                             </li>

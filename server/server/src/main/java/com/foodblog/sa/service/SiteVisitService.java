@@ -3,7 +3,6 @@ package com.foodblog.sa.service;
 import java.util.Collection;
 
 import com.foodblog.sa.domain.SiteVisitModel;
-import com.foodblog.sa.domain.UserModel;
 
 public interface SiteVisitService {
 

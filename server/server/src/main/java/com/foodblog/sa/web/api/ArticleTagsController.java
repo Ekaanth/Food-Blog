@@ -1,7 +1,6 @@
 package com.foodblog.sa.web.api;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.foodblog.sa.domain.ArticleModel;
-import com.foodblog.sa.domain.SiteVisitModel;
 import com.foodblog.sa.domain.UserModel;
 import com.foodblog.sa.service.ArticleService;
 import com.foodblog.sa.tmodel.TArticle;

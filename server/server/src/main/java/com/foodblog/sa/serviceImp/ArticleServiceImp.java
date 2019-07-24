@@ -12,8 +12,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.foodblog.sa.domain.ArticleModel;
 import com.foodblog.sa.domain.ArticleQuoteModel;
 import com.foodblog.sa.domain.ArticleTagsModel;
@@ -253,7 +250,7 @@ public class ArticleServiceImp implements ArticleService {
 
 	@Override
 	public Collection<TCategoryCount> getRandomCategoryCount() {
-		List<ArticleTagsModel> tCount = (List<ArticleTagsModel>) articelTagsRepo.findAll();
+		List<ArticleTagsModel> tCount = articelTagsRepo.findAll();
 		// shuffle list
 		Collections.shuffle(tCount);
 		// adding defined amount of numbers to target list

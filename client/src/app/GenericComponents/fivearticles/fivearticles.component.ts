@@ -20,7 +20,9 @@ export class FiveArticlesComponent implements OnChanges {
 
   ngOnChanges() {
     this.articleList = this.allArticleList;
-    this.changePage(1);
+    if (this.allArticleList !== undefined) {
+      this.changePage(1);
+    }
   }
 
   clickOnPost(article) {
